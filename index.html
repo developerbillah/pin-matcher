@@ -44,7 +44,7 @@
                                 </div>
                                 <div>
                                     <button type="submit" id="verify" class="submit-btn">Submit</button>
-                                    <p class="action-left">3 try left</p>
+                                    <!--<p class="action-left">3 try left</p>-->
                                 </div>
                             </div>
                         </div>
@@ -57,48 +57,53 @@
         </div>
     </div>
     <script>
-
+	    // Pin Generatior Function
+		var currentPin = 0;
         function pinNum(pin){
             var randPin = Math.random()*9999;
             var genNum = Math.round(randPin);
-            var currentPin = document.getElementById("current-pin").value = genNum;
+            currentPin = document.getElementById("current-pin").value = genNum;
         }
         
+        //Generate Button Click Event
         var generateBtn = document.getElementById("gen-btn");
         generateBtn.addEventListener("click", function(){
             pinNum();
-       });
+        });
 
+       //Input Button Event Handel
        function getInput(i){
            document.getElementById("display").value += i;
            
        }
 
+      //Cleare Button Click Event
       const clear = document.getElementById("clear");
       clear.addEventListener("click", function(){
             document.getElementById("display").value = " ";
       });
-
+      
+      //Back Button Click Event
       function backSpace(){
         display.value = display.value.slice(0, - 1);
-     }
+      }
 
-
+     //Login Verify Click Check & Click Handle
      var verify = document.getElementById("verify");
      verify.addEventListener("click",function(){
           
-          var pinNumber = pinNum();
+          var pinNum = currentPin;
           var displayValue = document.getElementById("display").value;
-          if(pinNumber == displayValue){
-              console.log("Login Success");
+          if(pinNum == displayValue){
+              var successBtn = document.getElementById("matched");
+              successBtn.style.display = "block";
           }else{
-              console.log("Wrong");
+              var failBtn = document.getElementById("not-match");
+              failBtn.style.display = "block";
           }
          
      });
   
-
-
     </script>
 </body>
 </html>
